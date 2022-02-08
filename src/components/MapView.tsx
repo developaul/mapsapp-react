@@ -2,10 +2,11 @@ import { useContext, useLayoutEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 
 import { Loading } from "./";
-import { PlacesContext } from "../context";
+import { MapContext, PlacesContext } from "../context";
 
 export const MapView = () => {
 
+  const { setMap } = useContext(MapContext)
   const { userLocation, isLoading } = useContext(PlacesContext)
   const mapDiv = useRef<HTMLDivElement>(null)
 
@@ -14,12 +15,14 @@ export const MapView = () => {
 
     const map = new mapboxgl.Map({
       container: mapDiv.current!, // container ID
-      style: 'mapbox://styles/mapbox/streets-v11', // style URL
+      // style: 'mapbox://styles/mapbox/streets-v11', // style URL
+      // style: 'mapbox://styles/mapbox/light-v10', // style URL
+      style: 'mapbox://styles/mapbox/dark-v10', // style URL
       center: userLocation, // starting position [lng, lat]
       zoom: 14 // starting zoom
     });
 
-    console.log("🚀 ~ useLayoutEffect ~ map", map)
+    setMap(map)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading])
