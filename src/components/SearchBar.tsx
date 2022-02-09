@@ -1,4 +1,5 @@
 import { ChangeEvent, useContext, useRef } from "react";
+import { SearchResults } from ".";
 import { PlacesContext } from "../context";
 
 export const SearchBar = () => {
@@ -30,6 +31,8 @@ export const SearchBar = () => {
         className="form-control"
         placeholder="Buscar lugar..."
         type="text" />
+
+      <SearchResults />
     </div>
   )
 };
